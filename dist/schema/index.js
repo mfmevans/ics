@@ -1,105 +1,78 @@
+// import Joi from 'joi'
+// const dateTimeSchema = Joi.array().min(3).max(7).ordered(
+//   Joi.number().integer(),
+//   Joi.number().integer().min(1).max(12),
+//   Joi.number().integer().min(1).max(31),
+//   Joi.number().integer().min(0).max(23),
+//   Joi.number().integer().min(0).max(60),
+//   Joi.number().integer().min(0).max(60)
+// )
+// const durationSchema = Joi.object().keys({
+//   before: Joi.boolean(),//option to set before alaram
+//   weeks: Joi.number(),
+//   days: Joi.number(),
+//   hours: Joi.number(),
+//   minutes: Joi.number(),
+//   seconds: Joi.number()
+// })
+// const contactSchema = Joi.object().keys({
+//   name: Joi.string(),
+//   email: Joi.string().email({ tlds: { allow: false } }),
+//   rsvp: Joi.boolean(),
+//   dir: Joi.string().uri(),
+//   partstat: Joi.string(),
+//   role: Joi.string()
+// })
+// const organizerSchema = Joi.object().keys({
+//   name: Joi.string(),
+//   email: Joi.string().email({ tlds: { allow: false } })
+// })
+// const alarmSchema = Joi.object().keys({
+//   action: Joi.string().regex(/audio|display|email/).required(),
+//   trigger: Joi.any().required(),
+//   description: Joi.string(),
+//   duration: durationSchema,
+//   repeat: Joi.number(),
+//   attach: Joi.string(),
+//   attachType: Joi.string(),
+//   summary: Joi.string(),
+//   attendee: contactSchema,
+//   'x-prop': Joi.any(),
+//   'iana-prop': Joi.any()
+// })
+// const schema = Joi.object().keys({
+//   summary: Joi.string(),
+//   timestamp: Joi.any(),
+//   title: Joi.string(),
+//   productId: Joi.string(),
+//   method: Joi.string(),
+//   uid: Joi.string().required(),
+//   sequence: Joi.number(),
+//   start: dateTimeSchema.required(),
+//   duration: durationSchema,
+//   startType: Joi.string().regex(/utc|local/),
+//   startInputType: Joi.string().regex(/utc|local/),
+//   startOutputType: Joi.string().regex(/utc|local/),
+//   end: dateTimeSchema,
+//   endInputType: Joi.string().regex(/utc|local/),
+//   endOutputType: Joi.string().regex(/utc|local/),
+//   description: Joi.string(),
+//   url: Joi.string().uri(),
+//   geo: Joi.object().keys({ lat: Joi.number(), lon: Joi.number() }),
+//   location: Joi.string(),
+//   status: Joi.string().regex(/TENTATIVE|CANCELLED|CONFIRMED/),
+//   categories: Joi.array().items(Joi.string()),
+//   organizer: organizerSchema,
+//   attendees: Joi.array().items(contactSchema),
+//   alarms: Joi.array().items(alarmSchema),
+//   recurrenceRule: Joi.string(),
+//   busyStatus: Joi.string().regex(/TENTATIVE|FREE|BUSY|OOF/),
+//   created: dateTimeSchema,
+//   lastModified: dateTimeSchema,
+//   calName: Joi.string()
+// }).xor('end', 'duration')
+// export default function validateEvent(candidate) {
+//   const { error = null, value } = schema.validate(candidate)
+//   return { error, value }
+// }
 "use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = validateEvent;
-
-var _joi = _interopRequireDefault(require("joi"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var dateTimeSchema = _joi["default"].array().min(3).max(7).ordered(_joi["default"].number().integer(), _joi["default"].number().integer().min(1).max(12), _joi["default"].number().integer().min(1).max(31), _joi["default"].number().integer().min(0).max(23), _joi["default"].number().integer().min(0).max(60), _joi["default"].number().integer().min(0).max(60));
-
-var durationSchema = _joi["default"].object().keys({
-  before: _joi["default"]["boolean"](),
-  //option to set before alaram
-  weeks: _joi["default"].number(),
-  days: _joi["default"].number(),
-  hours: _joi["default"].number(),
-  minutes: _joi["default"].number(),
-  seconds: _joi["default"].number()
-});
-
-var contactSchema = _joi["default"].object().keys({
-  name: _joi["default"].string(),
-  email: _joi["default"].string().email({
-    tlds: {
-      allow: false
-    }
-  }),
-  rsvp: _joi["default"]["boolean"](),
-  dir: _joi["default"].string().uri(),
-  partstat: _joi["default"].string(),
-  role: _joi["default"].string()
-});
-
-var organizerSchema = _joi["default"].object().keys({
-  name: _joi["default"].string(),
-  email: _joi["default"].string().email({
-    tlds: {
-      allow: false
-    }
-  })
-});
-
-var alarmSchema = _joi["default"].object().keys({
-  action: _joi["default"].string().regex(/audio|display|email/).required(),
-  trigger: _joi["default"].any().required(),
-  description: _joi["default"].string(),
-  duration: durationSchema,
-  repeat: _joi["default"].number(),
-  attach: _joi["default"].string(),
-  attachType: _joi["default"].string(),
-  summary: _joi["default"].string(),
-  attendee: contactSchema,
-  'x-prop': _joi["default"].any(),
-  'iana-prop': _joi["default"].any()
-});
-
-var schema = _joi["default"].object().keys({
-  summary: _joi["default"].string(),
-  timestamp: _joi["default"].any(),
-  title: _joi["default"].string(),
-  productId: _joi["default"].string(),
-  method: _joi["default"].string(),
-  uid: _joi["default"].string().required(),
-  sequence: _joi["default"].number(),
-  start: dateTimeSchema.required(),
-  duration: durationSchema,
-  startType: _joi["default"].string().regex(/utc|local/),
-  startInputType: _joi["default"].string().regex(/utc|local/),
-  startOutputType: _joi["default"].string().regex(/utc|local/),
-  end: dateTimeSchema,
-  endInputType: _joi["default"].string().regex(/utc|local/),
-  endOutputType: _joi["default"].string().regex(/utc|local/),
-  description: _joi["default"].string(),
-  url: _joi["default"].string().uri(),
-  geo: _joi["default"].object().keys({
-    lat: _joi["default"].number(),
-    lon: _joi["default"].number()
-  }),
-  location: _joi["default"].string(),
-  status: _joi["default"].string().regex(/TENTATIVE|CANCELLED|CONFIRMED/),
-  categories: _joi["default"].array().items(_joi["default"].string()),
-  organizer: organizerSchema,
-  attendees: _joi["default"].array().items(contactSchema),
-  alarms: _joi["default"].array().items(alarmSchema),
-  recurrenceRule: _joi["default"].string(),
-  busyStatus: _joi["default"].string().regex(/TENTATIVE|FREE|BUSY|OOF/),
-  created: dateTimeSchema,
-  lastModified: dateTimeSchema,
-  calName: _joi["default"].string()
-}).xor('end', 'duration');
-
-function validateEvent(candidate) {
-  var _schema$validate = schema.validate(candidate),
-      _schema$validate$erro = _schema$validate.error,
-      error = _schema$validate$erro === void 0 ? null : _schema$validate$erro,
-      value = _schema$validate.value;
-
-  return {
-    error: error,
-    value: value
-  };
-}

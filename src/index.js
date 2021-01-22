@@ -1,7 +1,6 @@
 import uuid from 'uuid/v4'
 import {
   buildEvent,
-  validateEvent,
   formatEvent
 } from './pipeline'
 
@@ -10,7 +9,9 @@ function assignUniqueId(event) {
   return event
 }
 function validateAndBuildEvent(event) {
-  return validateEvent(buildEvent(event))
+  // removed build issue with Constructor Map requires new in Joi
+  // need to find alternative or fork joi to fix.
+  return buildEvent(event)
 }
 
 function applyInitialFormatting({ error, value }) {

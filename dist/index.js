@@ -18,7 +18,9 @@ function assignUniqueId(event) {
 }
 
 function validateAndBuildEvent(event) {
-  return (0, _pipeline.validateEvent)((0, _pipeline.buildEvent)(event));
+  // removed build issue with Constructor Map requires new in Joi
+  // need to find alternative or fork joi to fix.
+  return (0, _pipeline.buildEvent)(event);
 }
 
 function applyInitialFormatting(_ref) {
